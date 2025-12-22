@@ -10,19 +10,45 @@ export default function Authenticated({ auth, header, children }) {
 
     return (
         <div className="min-h-screen bg-gray-100">
-            <nav className="bg-white border-b border-gray-100">
+            <nav className="bg-gradient-to-r from-red-500 via-red-600 to-pink-600 shadow-lg">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between h-16">
                         <div className="flex">
                             <div className="shrink-0 flex items-center">
-                                <Link href="/">
-                                    <ApplicationLogo className="block h-9 w-auto fill-current text-gray-800" />
+                                <Link href="/" className="flex items-center space-x-2">
+                                    <div className="bg-white rounded-full p-2 shadow-md">
+                                        <svg className="h-6 w-6 text-red-500" fill="currentColor" viewBox="0 0 20 20">
+                                            <path d="M10 2a8 8 0 100 16 8 8 0 000-16zm0 14a6 6 0 110-12 6 6 0 010 12z"/>
+                                            <circle cx="10" cy="10" r="3"/>
+                                        </svg>
+                                    </div>
+                                    <span className="text-white font-bold text-xl hidden sm:block">PickPoke</span>
                                 </Link>
                             </div>
 
                             <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                <NavLink href={route('dashboard')} active={route().current('dashboard')}>
-                                    Dashboard
+                                <NavLink 
+                                    href={route('dashboard')} 
+                                    active={route().current('dashboard')}
+                                    className="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium leading-5 transition duration-150 ease-in-out focus:outline-none"
+                                    style={{
+                                        borderColor: route().current('dashboard') ? 'white' : 'transparent',
+                                        color: 'white'
+                                    }}
+                                >
+                                    Home
+                                </NavLink>
+                                <NavLink 
+                                    href="#"
+                                    className="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-white hover:border-white transition duration-150 ease-in-out focus:outline-none"
+                                >
+                                    Pokedex
+                                </NavLink>
+                                <NavLink 
+                                    href="#"
+                                    className="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-white hover:border-white transition duration-150 ease-in-out focus:outline-none"
+                                >
+                                    My Collection
                                 </NavLink>
                             </div>
                         </div>
@@ -34,7 +60,7 @@ export default function Authenticated({ auth, header, children }) {
                                         <span className="inline-flex rounded-md">
                                             <button
                                                 type="button"
-                                                className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150"
+                                                className="inline-flex items-center px-3 py-2 border-2 border-white text-sm leading-4 font-medium rounded-full text-white bg-white/20 hover:bg-white/30 focus:outline-none transition ease-in-out duration-150"
                                             >
                                                 {auth.user.name}
 
@@ -67,7 +93,7 @@ export default function Authenticated({ auth, header, children }) {
                         <div className="-mr-2 flex items-center sm:hidden">
                             <button
                                 onClick={() => setShowingNavigationDropdown((previousState) => !previousState)}
-                                className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out"
+                                className="inline-flex items-center justify-center p-2 rounded-md text-white hover:bg-white/20 focus:outline-none focus:bg-white/20 transition duration-150 ease-in-out"
                             >
                                 <svg className="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                                     <path
@@ -90,36 +116,61 @@ export default function Authenticated({ auth, header, children }) {
                     </div>
                 </div>
 
-                <div className={(showingNavigationDropdown ? 'block' : 'hidden') + ' sm:hidden'}>
+                <div className={(showingNavigationDropdown ? 'block' : 'hidden') + ' sm:hidden bg-red-700'}>
                     <div className="pt-2 pb-3 space-y-1">
-                        <ResponsiveNavLink href={route('dashboard')} active={route().current('dashboard')}>
-                            Dashboard
+                        <ResponsiveNavLink 
+                            href={route('dashboard')} 
+                            active={route().current('dashboard')}
+                            className="block pl-3 pr-4 py-2 border-l-4 text-base font-medium transition duration-150 ease-in-out"
+                            style={{
+                                borderColor: route().current('dashboard') ? 'white' : 'transparent',
+                                color: 'white',
+                                backgroundColor: route().current('dashboard') ? 'rgba(255, 255, 255, 0.1)' : 'transparent'
+                            }}
+                        >
+                            Home
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink 
+                            href="#"
+                            className="block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-white hover:bg-white/10 transition duration-150 ease-in-out"
+                        >
+                            Pokedex
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink 
+                            href="#"
+                            className="block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-white hover:bg-white/10 transition duration-150 ease-in-out"
+                        >
+                            My Collection
                         </ResponsiveNavLink>
                     </div>
 
-                    <div className="pt-4 pb-1 border-t border-gray-200">
+                    <div className="pt-4 pb-1 border-t border-white/20">
                         <div className="px-4">
-                            <div className="font-medium text-base text-gray-800">
+                            <div className="font-medium text-base text-white">
                                 {auth.user.name}
                             </div>
-                            <div className="font-medium text-sm text-gray-500">{auth.user.email}</div>
+                            <div className="font-medium text-sm text-white/80">{auth.user.email}</div>
                         </div>
 
                         <div className="mt-3 space-y-1">
-                            <ResponsiveNavLink href={route('profile.edit')}>Profile</ResponsiveNavLink>
-                            <ResponsiveNavLink method="post" href={route('logout')} as="button">
+                            <ResponsiveNavLink 
+                                href={route('profile.edit')}
+                                className="block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-white hover:bg-white/10 transition duration-150 ease-in-out"
+                            >
+                                Profile
+                            </ResponsiveNavLink>
+                            <ResponsiveNavLink 
+                                method="post" 
+                                href={route('logout')} 
+                                as="button"
+                                className="block w-full text-left pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-white hover:bg-white/10 transition duration-150 ease-in-out"
+                            >
                                 Log Out
                             </ResponsiveNavLink>
                         </div>
                     </div>
                 </div>
             </nav>
-
-            {header && (
-                <header className="bg-white shadow">
-                    <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">{header}</div>
-                </header>
-            )}
 
             <main>{children}</main>
         </div>
