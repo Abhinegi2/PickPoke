@@ -2,5 +2,23 @@
     "$schema": "https://docs.renovatebot.com/renovate-schema.json",
     "extends": [
         "config:recommended"
+    ],
+    "timezone": "Asia/Kolkata",
+    "schedule": [
+        "at 1:00pm every day"
+    ],
+    "lockFileMaintenance": {
+        "enabled": true,
+        "schedule": [
+            "at 1:00pm every day"
+        ]
+    },
+    "packageRules": [
+        {
+            "matchManagers": ["npm", "composer"],
+            "schedule": [
+                "at 1:00pm every day"
+            ]
+        }
     ]
 }
